@@ -22,6 +22,8 @@ const hostname = process.env.HOST_NAME;
 
 configViewEngine(app);
 
+connection();
+
 
 
 
