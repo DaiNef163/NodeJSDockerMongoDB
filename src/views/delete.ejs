@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete</title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <div class="topnav">
+      <a  href="/">Home</a>
+      <a href="/display">Display</a>
+
+    </div>
+    <!-- <%= JSON.stringify(user)%> -->
+    <form action="/delete-user" method="post">
+      <fieldset>
+       <legend>Delete user</legend>
+       <!-- <label  style="display: block; margin-bottom: 10px; font-weight: bold;" for="id">ID: <p style="display: inline;"><%= user.id %></p> </label> -->
+       <input type="hidden" name="id" value="<%= user.id %>">
+       
+       <label for="email">Email : </label>
+       <p style="display: inline;"><%= user.email %></p><br><br>
+       <label for="name">Name : </label>
+       <p style="display: inline;"><%= user.name %></p><br><br>
+       <label for="city">City : </label>
+       <p style="display: inline;"><%= user.city %></p><br><br>
+       <input type="submit" value="Delete">
+      </fieldset>
+     </form>
+  </body>
+</html>

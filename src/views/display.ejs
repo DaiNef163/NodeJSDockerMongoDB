@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="topnav">
+      <a class="active" href="/">Home</a>
+      <a href="#contact">Dipsplay</a>
+
+    </div>
+    <table id="customers">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>City</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% for(var i=0; i < user.length; i++) { %>
+        <tr>
+          <td><%= user[i].id %></td>
+          <td><%= user[i].name %></td>
+          <td><%= user[i].email %></td>
+          <td><%= user[i].city %></td>
+          <td>
+            <a href="/edit/<%= user[i].id %>">Edit</a>
+            <a href="/delete/<%= user[i].id %>">Delete</a>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </body>
+</html>
