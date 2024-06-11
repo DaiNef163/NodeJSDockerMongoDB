@@ -4,16 +4,18 @@ const configViewEngine = require("./config/viewEngine");
 const app = express();
 const webRoutes = require("./routes/web");
 const { connection } = require("./config/database");
-
-
-
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const Kitten = require("./models/user");
 require("dotenv").config();
 
-app.use(express.json( )); // Used to parse JSON bodies
-app.use(express.urlencoded( )); //Parse URL-encoded bodies
+// app.use(express.json()); // Used to parse JSON bodies
+// app.use(express.urlencoded()); //Parse URL-encoded bodies
 
+// console.log(process.env.PORT);
 
-console.log(process.env.PORT);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use("/", webRoutes);
 
@@ -22,11 +24,15 @@ const hostname = process.env.HOST_NAME;
 
 configViewEngine(app);
 
-connection();
 
 
-
-
-app.listen(port, hostname, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+(async () => {
+  try {
+    await connection();
+    app.listen(port, hostname, () => {
+      console.log(`Example app listening on port ${port}`);
+    });
+  } catch (error) {
+    console.log("error connect to db", error);
+  }
+})();
