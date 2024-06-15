@@ -7,8 +7,14 @@ const apiRoutes = require("./routes/api");
 const { connection } = require("./config/database");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const Kitten = require("./models/user");
+
 require("dotenv").config();
+
+const fileUpload = require('express-fileupload');
+// default options
+app.use(fileUpload());
+
+app.use(express.static("public"));
 
 // app.use(express.json()); // Used to parse JSON bodies
 // app.use(express.urlencoded()); //Parse URL-encoded bodies

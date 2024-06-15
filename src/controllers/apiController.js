@@ -1,4 +1,7 @@
 const User = require("../models/user");
+const Customer = require("../models/customer")
+
+const { uploadSingleFile } = require("../services/fileService");
 
 const getUsersAPI = async (req, res) => {
   const results = await User.find();
@@ -46,8 +49,6 @@ const putEditAPI = async (req, res) => {
 const DeleteAPI = async (req, res) => {
   let { id, email, name, city } = req.body;
 
-  console.log("check id", id);
-
   let user = await User.deleteOne({ _id: id });
   return res.status(200).json({
     EC: 0,
@@ -55,9 +56,20 @@ const DeleteAPI = async (req, res) => {
   });
 };
 
+const postUploadSinglefileAPI = async (req, res) => {
+  console.log("req.file", req.files);
+  if (!req.files || Object.keys(req.files).length === 0) {
+    res.status(400).send("No files were uploaded.");
+    return;
+  }
+  uploadSingleFile(req.files.image);
+  res.send("ok file");
+};
+
 module.exports = {
   getUsersAPI,
   postCreateUserAPI,
   putEditAPI,
   DeleteAPI,
+  postUploadSinglefileAPI,
 };

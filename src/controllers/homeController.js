@@ -1,6 +1,7 @@
 const { connection } = require("../config/database");
 
 const User = require("../models/user");
+const Customer = require("../models/customer")
 const getHomePage = (req, res) => {
   res.render("home.ejs");
 };
