@@ -7,22 +7,27 @@ const apiRoutes = require("./routes/api");
 const { connection } = require("./config/database");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
+const helmet = require('helmet');
 
 require("dotenv").config();
 
-const fileUpload = require('express-fileupload');
+const fileUpload = require("express-fileupload");
+app.use(cors());
+app.use(helmet())
 // default options
 app.use(fileUpload());
 
 app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 // app.use(express.json()); // Used to parse JSON bodies
 // app.use(express.urlencoded()); //Parse URL-encoded bodies
 
 // console.log(process.env.PORT);
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/", webRoutes);
 app.use("/v1/api", apiRoutes);
@@ -31,8 +36,6 @@ const port = process.env.PORT;
 const hostname = process.env.HOST_NAME;
 
 configViewEngine(app);
-
-
 
 (async () => {
   try {

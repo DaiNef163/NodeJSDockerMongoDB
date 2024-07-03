@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Customer</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body>
+    <div class="topnav">
+      <a class="active" href="/">Delete Customer</a>
+    </div>
+    <form action="/v1/api/delete-customer" method="post">
+      <fieldset>
+        <legend>Edit user</legend>
+        <!-- <label  style="display: block; margin-bottom: 10px; font-weight: bold;" for="id">ID: <p style="display: inline;"><%= customer.id %></p> </label> -->
+        <input type="hidden" name="id" value="<%= customer.id %>" />
+
+        <label for="name">Name: </label>
+        <%= customer.name %>
+        <br /><br />
+        <label for="address">address: </label>
+
+        <%= customer.address %>
+        <br /><br />
+        <label for="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          value="<%= customer.email %>"
+        /><br /><br />
+        <label for="phone" value="<%= customer.phone %>">phone</label>
+        <input type="text" id="phone" name="phone" /><br /><br />
+        <label for="image">Image</label><br />
+        <img
+          src="/images/<%= customer.image %>"
+          alt=""
+          style="max-width: 200px; max-height: 200px"
+        /><br /><br />
+        <label for="description">description</label>
+        <input
+          type="file"
+          id="image"
+          name="image"
+          value="<%= customer.phone %>"
+        /><br /><br />
+        <input
+          type="text"
+          id="description"
+          name="description"
+          value="<%= customer.description %>"
+        /><br /><br />
+        <input type="submit" value="Delete" />
+      </fieldset>
+    </form>
+  </body>
+</html>

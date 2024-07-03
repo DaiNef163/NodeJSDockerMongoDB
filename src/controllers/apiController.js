@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const Customer = require("../models/customer")
 
-const { uploadSingleFile } = require("../services/fileService");
+const { uploadSingleFile, uploadMultipleFile } = require("../services/fileService");
 
 const getUsersAPI = async (req, res) => {
   const results = await User.find();
@@ -58,11 +58,24 @@ const DeleteAPI = async (req, res) => {
 
 const postUploadSinglefileAPI = async (req, res) => {
   console.log("req.file", req.files);
+
+  console.log("check array",Array.isArray(req.files.image));
   if (!req.files || Object.keys(req.files).length === 0) {
     res.status(400).send("No files were uploaded.");
-    return;
+    return ;
   }
   uploadSingleFile(req.files.image);
+  res.send("ok file");
+};
+const postuploadMultipleFile = async (req, res) => {
+  console.log("req.file", req.files);
+
+  console.log("check array",Array.isArray(req.files.image));
+  if (!req.files || Object.keys(req.files).length === 0) {
+    res.status(400).send("No files were uploaded.");
+    return ;
+  }
+  uploadMultipleFile(req.files.image);
   res.send("ok file");
 };
 
@@ -72,4 +85,5 @@ module.exports = {
   putEditAPI,
   DeleteAPI,
   postUploadSinglefileAPI,
+  postuploadMultipleFile
 };

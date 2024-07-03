@@ -1,29 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css">
-  </head>
-  <body>
-    <div class="topnav">
-      <a class="active" href="/">Home</a>
-      <a href="/display">Dipsplay</a>
 
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
 
-    <form action="/create-user" method="post">
-      <fieldset>
-       <legend>Add new user</legend>
-       <label for="email">Email</label>
-       <input type="email" id="email" name="email"><br><br>
-       <label for="name">Name</label>
-       <input type="text" id="name" name="name"><br><br>
-       <label for="city">City</label>
-       <input type="text" id="city" name="city"><br><br>
-       <input type="submit" value="Submit">
-      </fieldset>
-     </form>
-  </body>
+<body>
+  <div class="topnav">
+    <a class="active" href="/">Home</a>
+    <a href="/display">Dipsplay User</a>
+    <a href="/v1/api/customer">Dipsplay Customer</a>
+  </div>
+
+  <form action="/create-user" method="post">
+    <fieldset>
+      <legend>Add new user</legend>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" /><br /><br />
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" /><br /><br />
+      <label for="city">City</label>
+      <input type="text" id="city" name="city" /><br /><br />
+      <input type="submit" value="Submit" />
+    </fieldset>
+  </form>
+  <form action="/v1/api/create-customer" method="post" enctype="multipart/form-data">
+    <fieldset>
+      <legend>Add new customer</legend>
+      <label for="name">Name</label>
+      <input type="name" id="name" name="name" /><br /><br />
+      <label for="address">address</label>
+      <input type="text" id="address" name="address" /><br /><br />
+      <label for="email">email</label>
+      <input type="email" id="email" name="email" /><br /><br />
+      <label for="phone">phone</label>
+      <input type="number" id="phone" name="phone" /><br /><br />
+      <label for="image">image</label>
+      <input type="file" id="image" name="image" /><br /><br />
+      <label for="description">description</label>
+      <input type="text" id="description" name="description" /><br /><br />
+      <input type="submit" value="Upload!" />
+    </fieldset>
+  </form>
+</body>
+
 </html>

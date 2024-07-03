@@ -1,7 +1,7 @@
 const { connection } = require("../config/database");
 
 const User = require("../models/user");
-const Customer = require("../models/customer")
+const Customer = require("../models/customer");
 const getHomePage = (req, res) => {
   res.render("home.ejs");
 };
@@ -82,7 +82,7 @@ const postDelete = async (req, res) => {
   console.log("check id", id);
 
   try {
-    await User.deleteOne({_id:id})
+    await User.deleteOne({ _id: id });
 
     res.redirect("/display");
   } catch (error) {
