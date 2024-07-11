@@ -1,15 +1,16 @@
+const { json } = require("express");
 const Customer = require("../models/customer");
-const {
-  createCustomerService,
-
-} = require("../services/customerService");
+const { createCustomerService } = require("../services/customerService");
 const { uploadSingleFile } = require("../services/fileService");
 const path = require("path");
 
 const getDisplayCustomer = async (req, res) => {
   // const [users] = await connection.query("SELECT * FROM Users");
   const customer = await Customer.find();
-  res.render("customerView.ejs", { customer: customer });
+  // res.render("customerView.ejs", { customer: customer });
+  return res.status(200).json({
+    data: customer,
+  });
 };
 
 const postCreateCustomer = async (req, res) => {
@@ -49,8 +50,6 @@ const getUpdateCustomer = async (req, res) => {
   res.render("editCustomer", { customer: customer });
 };
 
-
-
 const postUpdateCustomer = async (req, res) => {
   try {
     let id = req.body.id;
@@ -65,7 +64,6 @@ const postUpdateCustomer = async (req, res) => {
       imageURL = result.path;
     }
     console.log("check img", imageURL);
-
 
     let customer = await Customer.updateOne(
       { _id: id },
@@ -92,14 +90,25 @@ const getDeleteCustomer = async (req, res) => {
   const customer = await Customer.findById(id);
   res.render("deleteCustomer", { customer: customer });
 };
-const postDeleteCustomer = async (req,res) =>{
+const postDeleteCustomer = async (req, res) => {
   let id = req.body.id;
   console.log(id);
-  let customer = await Customer.deleteOne({_id:id}).exec();
-  res.redirect("/v1/api/customer")
-  console.log("check deletee",customer);
-}
+  let customer = await Customer.deleteOne({ _id: id }).exec();
+  res.redirect("/v1/api/customer");
+  console.log("check deletee", customer);
+};
 
+const deleteACustomer = async (req, res) => {
+  try {
+    let id = req.body.id;
+    console.log(id);
+    let customer = await Customer.deleteById({ _id: id });
+    res.redirect("/v1/api/customer");
+    console.log("check deletee", customer);
+  } catch (error) {
+    console.log("check error", error);
+  }
+};
 
 module.exports = {
   postCreateCustomer,
@@ -107,5 +116,6 @@ module.exports = {
   getUpdateCustomer,
   postUpdateCustomer,
   getDeleteCustomer,
-  postDeleteCustomer
+  postDeleteCustomer,
+  deleteACustomer,
 };
