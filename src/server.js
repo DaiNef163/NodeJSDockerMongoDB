@@ -8,13 +8,13 @@ const { connection } = require("./config/database");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const helmet = require('helmet');
+const helmet = require("helmet");
 
 require("dotenv").config();
 
 const fileUpload = require("express-fileupload");
 app.use(cors());
-app.use(helmet())
+app.use(helmet());
 // default options
 app.use(fileUpload());
 
@@ -41,9 +41,10 @@ configViewEngine(app);
   try {
     await connection();
     app.listen(port, hostname, () => {
-      console.log(`Example app listening on port ${port}`);
+      console.log(`Example app listening on port http://localhost:${port}`);
     });
   } catch (error) {
     console.log("error connect to db", error);
   }
 })();
+console.log(`Example app listening on port http://localhost:${port}`);

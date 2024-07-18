@@ -27,3 +27,5 @@ services:
     restart: unless-stopped
     ports:
       - "${WEB_MONGODB_PORT}:8081"
+
+# docker compose -p nodejs-mongdb up -d

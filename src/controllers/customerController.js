@@ -6,10 +6,34 @@ const path = require("path");
 
 const getDisplayCustomer = async (req, res) => {
   // const [users] = await connection.query("SELECT * FROM Users");
-  const customer = await Customer.find();
   // res.render("customerView.ejs", { customer: customer });
+
+  console.log(req.query);
+  let limit = req.query.limit;
+  let page = req.query.page;
+  let name = req.query.name;
+  let address = req.query.address;
+  let result = null;
+
+  let find = {};
+  if (name) {
+    find.name = { $regex: ".*" + name + ".*" };
+  }
+  if (name) {
+    find.address = { $regex: ".*" + address + ".*" };
+  }
+  if (limit && page) {
+    let offset = (page - 1) * limit;
+    // result = { limit, page };
+
+    result = await Customer.find(find).skip(offset).limit(limit).exec();
+  } else {
+    result = await Customer.find({});
+    // res.render('customerView.ejs',{customer:result})
+  }
+
   return res.status(200).json({
-    data: customer,
+    data: result,
   });
 };
 
@@ -41,7 +65,6 @@ const postCreateCustomer = async (req, res) => {
     console.log(error);
   }
 };
-
 const getUpdateCustomer = async (req, res) => {
   let id = req.params.id;
   console.log("check id cuistomer ", id);
@@ -49,7 +72,6 @@ const getUpdateCustomer = async (req, res) => {
   const customer = await Customer.findById(id);
   res.render("editCustomer", { customer: customer });
 };
-
 const postUpdateCustomer = async (req, res) => {
   try {
     let id = req.body.id;

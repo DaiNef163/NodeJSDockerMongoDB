@@ -19,7 +19,8 @@
     "mongoose": "8.4.1",
     "mongoose-delete": "^1.0.2",
     "mysql2": "^3.9.7",
-    "promise-mysql": "^5.2.0"
+    "promise-mysql": "^5.2.0",
+    "qs": "^6.12.3"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
